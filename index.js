@@ -1,12 +1,6 @@
 import goto from './modules/goto.js';
 import BooksMaster from './modules/bookClass.js';
-import { DateTime } from "./modules/luxon.min.js";
-
-setInterval(() => {
-  const now = DateTime.now();
-  const showDate = now.toLocaleString(DateTime.DATE_FULL)  + ' ' + now.hour + ':' + twoDigits(now.minute) + ':' + twoDigits(now.second) + ' hrs.';
-  document.getElementById('showDate').innerHTML = showDate;
-},1000);
+import { DateTime } from './luxon.min.js';
 
 const form = document.getElementById('addBookForm');
 const fieldTitle = document.getElementById('book-title');
@@ -55,11 +49,6 @@ const showAlert = (opc) => {
   else alert.style.display = 'none';
 };
 
-const twoDigits = num => {
-  if( num < 10) return '0' + num;
-  else return num;
-}
-
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -77,6 +66,17 @@ form.addEventListener('submit', (event) => {
 
 fieldTitle.addEventListener('keyup', () => showAlert('hide'));
 fieldAuthor.addEventListener('keyup', () => showAlert('hide'));
+
+const twoDigits = (num) => {
+  if (num < 10) return `0${num}`;
+  return num;
+};
+
+setInterval(() => {
+  const now = DateTime.now();
+  const showDate = `${now.toLocaleString(DateTime.DATE_FULL)} ${now.hour}:${twoDigits(now.minute)}:${twoDigits(now.second)} hrs.`;
+  document.getElementById('showDate').innerHTML = showDate;
+}, 1000);
 
 books.listBooks();
 showAlert('hide');
