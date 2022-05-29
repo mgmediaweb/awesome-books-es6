@@ -1,96 +1,83 @@
-import { delBooks, showAlert } from './modules/functions.js';
-//import form from './modules/form.js';
 import goto from './modules/goto.js';
+import BooksMaster from './modules/bookClass.js';
+import { DateTime } from "./modules/luxon.min.js";
 
-class BooksClass {
-  constructor() {
-    return null;
-  }
+setInterval(() => {
+  const now = DateTime.now();
+  const showDate = now.toLocaleString(DateTime.DATE_FULL)  + ' ' + now.hour + ':' + twoDigits(now.minute) + ':' + twoDigits(now.second) + ' hrs.';
+  document.getElementById('showDate').innerHTML = showDate;
+},1000);
 
-  add(title = null, author = null) {
-    if (title && author) {
-      const bookInfo = {
-        title,
-        author,
-      };
+const form = document.getElementById('addBookForm');
+const fieldTitle = document.getElementById('book-title');
+const fieldAuthor = document.getElementById('book-author');
+const btnsNav = document.querySelectorAll('.nav-button');
 
-      const bookMem = this.constructor.get();
-      bookMem.push(bookInfo);
-      this.constructor.set(bookMem);
-      this.show();
-      goto('booklist');
-    }
-  }
+btnsNav.forEach((btn) => {
+  btn.addEventListener('click', () => goto(btn.getAttribute('id').slice(4)));
+});
 
-  del(id) {
-    const books = this.constructor.get();
-
-    const newBooks = books.filter((item, key) => {
-      if (key !== id) return true;
-      return null;
+const loadButtons = () => {
+  const btnsRemove = document.querySelectorAll('.btn-remove');
+  btnsRemove.forEach((btn) => {
+    const bookClick = new BooksMaster();
+    btn.addEventListener('click', () => {
+      bookClick.del(btn.getAttribute('id').slice(4));
+      loadButtons();
     });
+  });
+};
 
-    this.constructor.set(newBooks);
+class BooksClass extends BooksMaster {
+  constructor() {
+    super();
+    return undefined;
+  }
+
+  addBook(book, author) {
+    this.add(book, author);
+    loadButtons();
+    goto('booklist');
+  }
+
+  listBooks() {
     this.show();
-  }
-
-  static get() {
-    const books = JSON.parse(localStorage.getItem('books'));
-    if (books) return books;
-    return [];
-  }
-
-  static set(books) {
-    localStorage.setItem('books', JSON.stringify(books));
-  }
-
-  show() {
-    const books = this.constructor.get();
-    const tableBook = document.getElementById('bookList').getElementsByTagName('tbody')[0];
-    tableBook.innerHTML = '';
-
-    if (books && books.length) {
-      books.forEach((item, key) => {
-        const newRow = tableBook.insertRow(key);
-        const newCellTitle = newRow.insertCell(0);
-        const newCellAuthor = newRow.insertCell(1);
-        const newCellButton = newRow.insertCell(2);
-
-        newCellButton.setAttribute('class', 'cellBtn text-center');
-
-        const newBook = document.createTextNode(item.title);
-        const newAuthor = document.createTextNode(item.author);
-
-        newCellTitle.appendChild(newBook);
-        newCellAuthor.appendChild(newAuthor);
-        newCellButton.innerHTML = `<button type="button" onClick="delBooks(this.constructor,${key})">Remove</button>`;
-      });
-
-      let message = `${books.length} books availables`;
-      if (books.length === 1) message = '1 book available';
-      document.getElementById('cantBooks').innerHTML = message;
-    } else {
-      const newRow = tableBook.insertRow(0);
-      const newCell = newRow.insertCell(0);
-      const text = document.createTextNode('No books availables');
-
-      newCell.setAttribute('colspan', 3);
-      newCell.setAttribute('class', 'text-center');
-      newCell.appendChild(text);
-      document.getElementById('cantBooks').innerHTML = '';
-    }
-
-    return true;
+    loadButtons();
   }
 }
 
 const books = new BooksClass();
 
-document.getElementById('nav-booklist').addEventListener('click', () => goto('booklist'));
-document.getElementById('nav-addbook').addEventListener('click', () => goto('addbook'));
-document.getElementById('nav-contact').addEventListener('click', () => goto('contact'));
+const showAlert = (opc) => {
+  const alert = document.querySelector('.alert');
 
-books.show();
+  if (opc === 'show') alert.style.display = 'block';
+  else alert.style.display = 'none';
+};
+
+const twoDigits = num => {
+  if( num < 10) return '0' + num;
+  else return num;
+}
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const bookTitle = document.getElementById('book-title');
+  const bookAuthor = document.getElementById('book-author');
+
+  if ((bookTitle.value.trim() !== '') && (bookAuthor.value.trim() !== '')) {
+    books.addBook(bookTitle.value, bookAuthor.value);
+    bookTitle.value = '';
+    bookAuthor.value = '';
+  } else {
+    showAlert('show');
+  }
+});
+
+fieldTitle.addEventListener('keyup', () => showAlert('hide'));
+fieldAuthor.addEventListener('keyup', () => showAlert('hide'));
+
+books.listBooks();
 showAlert('hide');
-delBooks();
 goto('booklist');

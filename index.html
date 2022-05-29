@@ -16,9 +16,9 @@
             </a>
             <nav>
                 <ul>
-                    <li><a id="nav-booklist" href="#">List</a></li>
-                    <li><a id="nav-addbook" href="#">Add</a></li>
-                    <li><a id="nav-contact" href="#">Contact</a></li>
+                    <li><a id="nav-booklist" href="#" class="nav-button">List</a></li>
+                    <li><a id="nav-addbook" href="#" class="nav-button">Add</a></li>
+                    <li><a id="nav-contact" href="#" class="nav-button">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -43,8 +43,8 @@
         <h1>Add a new book</h1>
         <div class="formBox">
             <form id="addBookForm" action="#">
-                <input id="book-title" type="text" placeholder="Title" onkeyup="hideAlert()" />
-                <input id="book-author" type="text" placeholder="Author" onkeyup="hideAlert()" />
+                <input id="book-title" type="text" placeholder="Title" />
+                <input id="book-author" type="text" placeholder="Author" />
                 <button type="submit">Add</button>
                 <div class="alert">You need to fill both fields</div>
             </form>
@@ -66,7 +66,7 @@
 
     <footer>
         <div class="container">
-            <strong>Copyright</strong>  Awesome Books <!-- 2022 -->
+            <strong>Copyright</strong>  Awesome Books 2022 - <span id="showDate">Loading date...</span>
         </div>
     </footer>
 </body>
