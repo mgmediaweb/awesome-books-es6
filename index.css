@@ -183,6 +183,7 @@ table th {
   margin: 0 auto;
   max-width: 1080px;
   padding: 0 10px;
+  position: relative;
   width: 100%;
 }
 
@@ -208,6 +209,13 @@ table th {
 #cantBooks {
   font-size: 0.9rem;
   margin-top: 20px;
+}
+
+#showDate {
+  color: rebeccapurple;
+  position: absolute;
+  top: 100px;
+  right: 10px;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
