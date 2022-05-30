@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Books</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script type="module" src="./index.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container container-flex">
+            <a href="javascript:goto('booklist');">
+                <img src="./images/logo.png" alt="Awesome Books Logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a id="nav-booklist" href="#" class="nav-button">List</a></li>
+                    <li><a id="nav-addbook" href="#" class="nav-button">Add</a></li>
+                    <li><a id="nav-contact" href="#" class="nav-button">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div id="showDate">Loading date...</div>
+        </div>
+    </header>
+    <section id="booklist">
+        <h1>All Awesome Books</h1>
+
+        <table id="bookList">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th class="cellBtn">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <p id="cantBooks"></p>
+    </section>
+
+    <section id="addbook">
+        <h1>Add a new book</h1>
+        <div class="formBox">
+            <form id="addBookForm" action="#">
+                <input id="book-title" type="text" placeholder="Title" />
+                <input id="book-author" type="text" placeholder="Author" />
+                <button type="submit">Add</button>
+                <div class="alert">You need to fill both fields</div>
+            </form>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h1>Contact Information</h1>
+            <p>Do have any questiona oe you just want to say "Hello"?</p>
+            <p>You can reach out to us!</p>
+            <ul class="bullet-win">
+                <li>Our e-mail: <a href="mailto:contact@awesomebooks.com">contacto@awesomebooks.com</a></li>
+                <li>Our phone number: <a href="tel:+15645625487">+1 (564) 562-5487</a></li>
+                <li>Our address: <a href="#">Pennsacola 544, 85621. Phoenix, AZ. (USA)</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <strong>Copyright</strong>  Awesome Books 2022
+        </div>
+    </footer>
+</body>
+</html>
