@@ -2,7 +2,7 @@
 
 # Project Name
 
-> Awesome Books With JS ES6.
+> Very useful website application to register a catalog of books by title and author, in addition to deleting those that are no longer used.
 
 
 ## Built With
