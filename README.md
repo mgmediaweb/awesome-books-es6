@@ -1,8 +1,9 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# Awesome Books
 
-> Very useful website application to register a catalog of books by title and author, in addition to deleting those that are no longer used.
+> ##### Very useful website application to register a catalog of books by title and author, in addition to deleting those that are no longer used.
+> ##### This app developed in JS ES6, HTML and CSS, in addition to numerous validations to optimize the user experience.
 
 
 ## Built With
